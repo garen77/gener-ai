@@ -4,7 +4,6 @@ from db import get_db
 
 authBp = Blueprint('auth',__name__)
 CORS(authBp, resources={r"/*": {"origins": "*"}})
-authBp.config['CORS_HEADERS'] = 'Content-Type'
 
 @authBp.route('/login', methods=['GET', 'POST'])
 @cross_origin()
