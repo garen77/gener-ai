@@ -1,4 +1,4 @@
-from flask import (Blueprint, request, session)
+from flask import (Blueprint, request, session, jsonify)
 from db import get_db
 
 authBp = Blueprint('auth',__name__)
@@ -34,7 +34,9 @@ def login():
         if not error:
             session['loggedIn'] = True
             session['username'] = user['name']
-            return f"Benvenuto {username} !!"
+            response = jsonify({'username': user['name'], 'code': user['code']})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
     return error
 
 @authBp.route('/logout')
