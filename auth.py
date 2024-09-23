@@ -1,5 +1,5 @@
-from flask import (Blueprint, request, session, jsonify, cross_origin)
-from flask_cors import CORS
+from flask import (Blueprint, request, session, jsonify)
+from flask_cors import (CORS, cross_origin)
 from db import get_db
 
 authBp = Blueprint('auth',__name__)
