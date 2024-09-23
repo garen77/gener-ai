@@ -1,9 +1,12 @@
-from flask import (Blueprint, request, session, jsonify)
+from flask import (Blueprint, request, session, jsonify, cross_origin)
+from flask_cors import CORS
 from db import get_db
 
 authBp = Blueprint('auth',__name__)
+CORS(authBp, resources={r"/*": {"origins": "*"}})
 
 @authBp.route('/login', methods=['GET', 'POST'])
+@cross_origin()
 def login():
     db = get_db()
     args = request.args
