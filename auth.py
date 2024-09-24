@@ -38,9 +38,6 @@ def login():
             session['loggedIn'] = True
             session['username'] = user['name']
             response = jsonify({'username': user['name'], 'code': user['code']})
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-            response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
             return response
     return error
 
