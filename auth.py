@@ -37,7 +37,10 @@ def login():
         if not error:
             session['loggedIn'] = True
             session['username'] = user['name']
-            response = jsonify({'username': user['name'], 'code': user['code'], 'email':user['email']})
+            email = ''
+            if "email" in user:
+                email = user['email']
+            response = jsonify({'username': user['name'], 'code': user['code'], 'email': email})
             return response
     return error
 
