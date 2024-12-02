@@ -53,6 +53,7 @@ def logout():
 def register():
     username = request.form['username']
     code = request.form['code']
+    email = request.form['email']
     password = request.form['password']
     db = get_db()
     userCollection = db['user']
@@ -63,5 +64,5 @@ def register():
     elif user_code is not None:
         return f"Utente con codice {code} gia' censito"
     else:
-        userCollection.insert_one({'name': username, 'password': password, 'code': code})
+        userCollection.insert_one({'name': username, 'password': password, 'code': code, 'email': email})
         return f"Utente {username} censito con successo!!"
