@@ -59,10 +59,13 @@ def register():
     userCollection = db['user']
     user = userCollection.find_one({"name": username})
     user_code = userCollection.find_one({"code": code})
+    user_email = userCollection.find_one({"email": email})
     if user is not None:
-        return f"Utente {username} gia' censito"
+        return f"Utente con username {username} gia' censito"
     elif user_code is not None:
         return f"Utente con codice {code} gia' censito"
+    elif user_email is not None:
+        return f"Utente con email {email} gia' censito"
     else:
         userCollection.insert_one({'name': username, 'password': password, 'code': code, 'email': email})
         return f"Utente {username} censito con successo!!"
