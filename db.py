@@ -8,6 +8,6 @@ def get_db():
     if 'db' not in g:
         #client = MongoClient('mongodb://localhost:27017/')
         client = MongoClient(uri, server_api=ServerApi('1'))
-        g.db = client['blog']
+        g.db = client['games']
     return g.db
 
