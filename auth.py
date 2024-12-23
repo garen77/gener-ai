@@ -40,7 +40,7 @@ def login():
             email = ''
             if "email" in user:
                 email = user['email']
-            response = jsonify({'username': user['name'], 'code': user['code'], 'email': email})
+            response = jsonify({'username': user['name'], 'email': email})
             return response
     return error
 
@@ -52,20 +52,16 @@ def logout():
 @authBp.route('/register', methods=['POST'])
 def register():
     username = request.form['username']
-    code = request.form['code']
     email = request.form['email']
     password = request.form['password']
     db = get_db()
     userCollection = db['user']
     user = userCollection.find_one({"name": username})
-    user_code = userCollection.find_one({"code": code})
     user_email = userCollection.find_one({"email": email})
     if user is not None:
         return f"Utente con username {username} gia' censito"
-    elif user_code is not None:
-        return f"Utente con codice {code} gia' censito"
     elif user_email is not None:
         return f"Utente con email {email} gia' censito"
     else:
-        userCollection.insert_one({'name': username, 'password': password, 'code': code, 'email': email})
+        userCollection.insert_one({'name': username, 'password': password, 'email': email})
         return f"Utente {username} censito con successo!!"
